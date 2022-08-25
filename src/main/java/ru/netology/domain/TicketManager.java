@@ -3,6 +3,7 @@ package ru.netology.domain;
 import ru.netology.repository.TicketRepository;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class TicketManager {
     private TicketRepository repo;
@@ -15,6 +16,7 @@ public class TicketManager {
         repo.save(ticket);
     }
 
+    TicketTravelTimeComparator comparator = new TicketTravelTimeComparator();
     public Ticket[] findTicket(String departureAirport, String arrivalAirport) {
         Ticket[] result = new Ticket[0];
         for (Ticket ticket : repo.findAllTickets()) {
@@ -23,7 +25,7 @@ public class TicketManager {
                 Ticket[] tmp = Arrays.copyOf(result, result.length + 1);
                 tmp[tmp.length - 1] = ticket;
                 result = tmp;
-                Arrays.sort(result);
+                Arrays.sort(result, comparator);
             }
         }
         return result;
