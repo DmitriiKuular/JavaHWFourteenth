@@ -10,7 +10,7 @@ public class TicketManagerTest {
     TicketRepository repo = new TicketRepository();
     TicketManager manager = new TicketManager(repo);
 
-    Ticket ticket1 = new Ticket(11, 9700, "OVB", "LED", 285);
+    Ticket ticket1 = new Ticket(11, 9700, "OVB", "LED", 380);
     Ticket ticket2 = new Ticket(22, 6800, "VVO", "MOW", 278);
     Ticket ticket3 = new Ticket(33, 9700, "OVB", "LED", 380);
     Ticket ticket4 = new Ticket(44, 24000, "KJA", "MNL", 784);
@@ -41,14 +41,14 @@ public class TicketManagerTest {
 
     @Test
     public void shouldFindSeveralTickets() {
-        Ticket[] expected = {ticket7, ticket6, ticket8};
+        Ticket[] expected = {ticket8, ticket6, ticket7};
         Ticket[] actual = manager.findTicket("KJA", "OVB");
 
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldFindSeveralTicketsWithTheSamePrice() {
+    public void shouldFindSeveralTicketsWithTheSameTime() {
         Ticket[] expected = {ticket1, ticket3};
         Ticket[] actual = manager.findTicket("OVB", "LED");
 
