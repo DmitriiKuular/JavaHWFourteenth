@@ -14,7 +14,7 @@ public class TicketManagerTest {
     Ticket ticket2 = new Ticket(22, 6800, "VVO", "MOW", 278);
     Ticket ticket3 = new Ticket(33, 9700, "OVB", "LED", 380);
     Ticket ticket4 = new Ticket(44, 24000, "KJA", "MNL", 784);
-    Ticket ticket5 = new Ticket(55, 38500, "YKS", "TJM", 320);
+    Ticket ticket5 = new Ticket(55, 38500, "YKS", "TJM", 220);
     Ticket ticket6 = new Ticket(66, 8600, "KJA", "OVB", 90);
     Ticket ticket7 = new Ticket(77, 7200, "KJA", "OVB", 120);
     Ticket ticket8 = new Ticket(88, 9500, "KJA", "OVB", 60);
@@ -59,6 +59,16 @@ public class TicketManagerTest {
     public void shouldNotFindTickets() {
         Ticket[] expected = {};
         Ticket[] actual = manager.findTicket("YKS", "OVB");
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindSeveralTicketsDifferentTime() {
+        ticket5.setDepartureAirport("OVB");
+        ticket5.setArrivalAirport("LED");
+        Ticket[] expected = {ticket5, ticket1, ticket3};
+        Ticket[] actual = manager.findTicket("OVB", "LED");
 
         assertArrayEquals(expected, actual);
     }
